@@ -1,0 +1,129 @@
+{% extends 'layout.html' %} {% block body %}
+
+<style>
+    .form-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      
+
+    }
+  
+    
+    .form-wrapper h2 {
+      margin-top: 0;
+      font-size: 28px;
+      font-weight: 400;
+    }
+    
+    .form-wrapper input[type=text],
+    .form-wrapper input[type=email],
+    .form-wrapper textarea {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    
+    .form-wrapper input[type=submit] {
+      background-color:black;
+      font-size: larger;
+      font-weight: bolder;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .form-wrapper input[type=submit]:hover {
+      background-color: #ffffff;
+      color:black;
+    }
+    
+    .form-wrapper input[type=text]:focus,
+    .form-wrapper input[type=email]:focus,
+    .form-wrapper textarea:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+      border-color: rgba(81, 203, 238, 1);
+    }
+    
+    .form-wrapper label {
+      font-size: 16px;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    .form-wrapper p.success-message,
+    .form-wrapper p.error-message {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+    
+    .form-wrapper p.success-message {
+      background-color: #DFF2BF;
+      border-color: #4F8A10;
+      color: #4F8A10;
+    }
+    
+    .form-wrapper p.error-message {
+      background-color: #FFBABA;
+      border-color: #D8000C;
+      color: #D8000C;
+    }
+    </style>
+   
+    <div class="form-wrapper" style="margin-top: 70px;margin-bottom: 50px;background-image:url('/static/images/s4.jpg') ;">
+      <h2 style="font-family:Georgia, 'Times New Roman', Times, serif;color:aliceblue;">Contact Us</h2>
+      <form id="contact-form" action="#" method="post">
+        <label for="name" style="color: aliceblue;">Name:</label>
+        <input type="text" id="name" name="name" required>
+    
+        <label for="email" style="color: aliceblue;">Email:</label>
+        <input type="email" id="email" name="email" required>
+    
+        <label for="message" style="color: aliceblue;">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+    
+        <input type="submit" value="Submit">
+      </form>
+      <p class="success-message" style="display: none;">Thanks for your message. We will get back to you soon!</p>
+      <p class="error-message" style="display: none;">Oops! Something went wrong. Please try again later.</p>
+    </div>
+
+    
+
+{% endblock %}
+
+<script>
+    const contactForm = document.querySelector('#contact-form');
+    const successMessage = document.querySelector('.success-message');
+    const errorMessage = document.querySelector('.error-message');
+    
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+    
+      const formData = new FormData(contactForm);
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: formData
+      });
+    
+      //if (response.ok) {
+        successMessage.style.display = 'block';
+        contactForm.reset();
+     // } else {
+    //    errorMessage.style.display = 'block';
+     // }
+    });
+    </script>
+    
